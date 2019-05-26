@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wechat.dao.Lost_itemMapper" >
+  <resultMap id="BaseResultMap" type="com.wechat.model.Lost_item" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Photo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QQ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Openid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Release_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Item_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, Description, Photo, QQ, Openid, Release_time, Item_type
+  </sql>
+  <insert id="insertSelective" parameterType="com.wechat.model.Lost_item" >
+    insert into lost_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="photo != null" >
+        Photo,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="openid != null" >
+        Openid,
+      </if>
+      <if test="releaseTime != null" >
+        Release_time,
+      </if>
+      <if test="itemType != null" >
+        Item_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseTime != null" >
+        #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemType != null" >
+        #{itemType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.model.Lost_item" >
+    update lost_item
+    <set >
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        Photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        Openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseTime != null" >
+        Release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemType != null" >
+        Item_type = #{itemType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

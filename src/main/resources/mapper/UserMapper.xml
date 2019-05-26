@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wechat.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.wechat.model.User" >
+    <constructor >
+      <idArg column="Openid" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Name" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Gender" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="Phone" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="QQ" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Openid, Name, Gender, Phone, QQ
+  </sql>
+  <insert id="insertSelective" parameterType="com.wechat.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="openid != null" >
+        Openid,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="gender != null" >
+        Gender,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="openid != null" >
+        #{openid,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.model.User" >
+    update user
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="gender != null" >
+        Gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=CHAR},
+      </if>
+    </set>
+    where Openid = #{openid,jdbcType=CHAR}
+  </update>
+</mapper>
