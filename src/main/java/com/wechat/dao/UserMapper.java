@@ -1,49 +1,30 @@
 package com.wechat.dao;
 
 import com.wechat.model.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Repository;
+import com.wechat.model.UserExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-@Repository()
 public interface UserMapper {
-    @Delete({
-        "delete from user",
-        "where Openid = #{openid,jdbcType=CHAR}"
-    })
+    int countByExample(UserExample example);
+
+    int deleteByExample(UserExample example);
+
     int deleteByPrimaryKey(String openid);
 
-    @Insert({
-        "insert into user (Openid, Name, ",
-        "Gender, Phone, QQ)",
-        "values (#{openid,jdbcType=CHAR}, #{name,jdbcType=CHAR}, ",
-        "#{gender,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{qq,jdbcType=CHAR})"
-    })
     int insert(User record);
 
     int insertSelective(User record);
 
-    @Select({
-        "select",
-        "Openid, Name, Gender, Phone, QQ",
-        "from user",
-        "where Openid = #{openid,jdbcType=CHAR}"
-    })
-    @ResultMap("BaseResultMap")
+    List<User> selectByExample(UserExample example);
+
     User selectByPrimaryKey(String openid);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByPrimaryKeySelective(User record);
 
-    @Update({
-        "update user",
-        "set Name = #{name,jdbcType=CHAR},",
-          "Gender = #{gender,jdbcType=CHAR},",
-          "Phone = #{phone,jdbcType=CHAR},",
-          "QQ = #{qq,jdbcType=CHAR}",
-        "where Openid = #{openid,jdbcType=CHAR}"
-    })
     int updateByPrimaryKey(User record);
 }

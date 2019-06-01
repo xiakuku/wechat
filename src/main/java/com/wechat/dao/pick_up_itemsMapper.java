@@ -1,53 +1,40 @@
 package com.wechat.dao;
 
-import com.wechat.model.pick_up_items;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Repository;
+import com.wechat.model.Lost_item;
+import com.wechat.model.Pick_and_photo;
+import com.wechat.model.Pick_up_items;
+import com.wechat.model.Pick_up_itemsExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-@Repository()
-public interface pick_up_itemsMapper {
-    @Delete({
-        "delete from pick_up_items",
-        "where Id = #{id,jdbcType=INTEGER}"
-    })
+public interface Pick_up_itemsMapper {
+    int countByExample(Pick_up_itemsExample example);
+
+    int deleteByExample(Pick_up_itemsExample example);
+
     int deleteByPrimaryKey(Integer id);
 
-    @Insert({
-        "insert into pick_up_items (Id, Description, ",
-        "Photo, QQ, Openid, ",
-        "Release_time, Item_type)",
-        "values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, ",
-        "#{photo,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, ",
-        "#{releaseTime,jdbcType=TIMESTAMP}, #{itemType,jdbcType=VARCHAR})"
-    })
-    int insert(pick_up_items record);
+    int insert(Pick_up_items record);
 
-    int insertSelective(pick_up_items record);
+    int insertSelective(Pick_up_items record);
 
-    @Select({
-        "select",
-        "Id, Description, Photo, QQ, Openid, Release_time, Item_type",
-        "from pick_up_items",
-        "where Id = #{id,jdbcType=INTEGER}"
-    })
-    @ResultMap("BaseResultMap")
-    pick_up_items selectByPrimaryKey(Integer id);
+    List<Pick_up_items> selectByExample(Pick_up_itemsExample example);
 
-    int updateByPrimaryKeySelective(pick_up_items record);
+    Pick_up_items selectByPrimaryKey(Integer id);
 
-    @Update({
-        "update pick_up_items",
-        "set Description = #{description,jdbcType=VARCHAR},",
-          "Photo = #{photo,jdbcType=VARCHAR},",
-          "QQ = #{qq,jdbcType=VARCHAR},",
-          "Openid = #{openid,jdbcType=VARCHAR},",
-          "Release_time = #{releaseTime,jdbcType=TIMESTAMP},",
-          "Item_type = #{itemType,jdbcType=VARCHAR}",
-        "where Id = #{id,jdbcType=INTEGER}"
-    })
-    int updateByPrimaryKey(pick_up_items record);
+    int updateByExampleSelective(@Param("record") Pick_up_items record, @Param("example") Pick_up_itemsExample example);
+
+    int updateByExample(@Param("record") Pick_up_items record, @Param("example") Pick_up_itemsExample example);
+
+    int updateByPrimaryKeySelective(Pick_up_items record);
+
+    int updateByPrimaryKey(Pick_up_items record);
+
+
+    //查找所有的信息
+    List<Pick_up_items> selectAllitem();
+
+
+    // 通过id查找所有的 该信息的图片
+    List<String> findPhototPathByItemId(Integer id);
 }

@@ -17,54 +17,59 @@ public class Lost_item {
 
     private String itemType;
 
-    public Lost_item(Integer id, String description, String photo, String qq, String openid, Date releaseTime, String itemType) {
-        this.id = id;
-        this.description = description;
-        this.photo = photo;
-        this.qq = qq;
-        this.openid = openid;
-        this.releaseTime = releaseTime;
-        this.itemType = itemType;
-    }
-
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
     public String getPhoto() {
         return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo == null ? null : photo.trim();
     }
 
     public String getQq() {
         return qq;
     }
 
+    public void setQq(String qq) {
+        this.qq = qq == null ? null : qq.trim();
+    }
+
     public String getOpenid() {
         return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
     }
 
     public Date getReleaseTime() {
         return releaseTime;
     }
 
+    public void setReleaseTime(Date releaseTime) {
+        this.releaseTime = releaseTime;
+    }
+
     public String getItemType() {
         return itemType;
     }
 
-    @Override
-    public String toString() {
-        return "Lost_item{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", photo='" + photo + '\'' +
-                ", qq='" + qq + '\'' +
-                ", openid='" + openid + '\'' +
-                ", releaseTime=" + releaseTime +
-                ", itemType='" + itemType + '\'' +
-                '}';
+    public void setItemType(String itemType) {
+        this.itemType = itemType == null ? null : itemType.trim();
     }
 }
