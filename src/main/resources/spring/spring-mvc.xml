@@ -17,11 +17,11 @@
 
     <!-- 配置mvc注解扫描  mvc的相关注解比如 ResquestMapping -->
     <mvc:annotation-driven/>
+
     <context:annotation-config />
 
     <!-- 读取db.properties文件的内容 -->
-    <util:properties id="db" location="classpath:db.properties">
-    </util:properties>
+    <util:properties id="db" location="classpath:db.properties"/>
 
     <!-- 配置连接池 -->
     <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"

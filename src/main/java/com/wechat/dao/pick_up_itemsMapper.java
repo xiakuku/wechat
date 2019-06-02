@@ -1,7 +1,6 @@
 package com.wechat.dao;
 
-import com.wechat.model.Lost_item;
-import com.wechat.model.Pick_and_photo;
+import com.wechat.model.Pickitem_photo_user;
 import com.wechat.model.Pick_up_items;
 import com.wechat.model.Pick_up_itemsExample;
 import java.util.List;
@@ -31,10 +30,21 @@ public interface Pick_up_itemsMapper {
     int updateByPrimaryKey(Pick_up_items record);
 
 
-    //查找所有的信息
-    List<Pick_up_items> selectAllitem();
+
+    // 连接查询，查找pickitem 和 user
+    List<Pickitem_photo_user> selectAllitems();
 
 
     // 通过id查找所有的 该信息的图片
     List<String> findPhototPathByItemId(Integer id);
+
+
+    //---zkt
+    //通过id查找到OpenID
+    String findOpenIDByItemId(Integer id);
+
+
+
+    //查找所有的信息， 废弃
+    //List<Pick_up_items> selectAllitem();
 }

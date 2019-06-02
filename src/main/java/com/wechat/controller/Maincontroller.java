@@ -1,5 +1,6 @@
 package com.wechat.controller;
 
+import com.wechat.dao.TestMapper;
 import com.wechat.model.*;
 import com.wechat.service.Lost_itemService;
 import com.wechat.service.Pick_itemService;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,15 +63,24 @@ public class Maincontroller {
     @ResponseBody
     public Map getAllPickitem(){
         Map map = new HashMap();
-        List<Pick_up_items> Pick_items =pick_itemService.findAll();
-       // map.put("Pick_items",Pick_items);
 
-        List<Pick_and_photo> list =pick_itemService.findAllInfo(Pick_items);
+        List<Pickitem_photo_user> allInfo = pick_itemService.findAll();
+        allInfo=pick_itemService.findAlladdpath(allInfo);
+        map.put("list",allInfo);
+        return map;
 
-        System.out.println(list);
+    }
 
 
-        map.put("list",list);
+    //---zkt
+    @RequestMapping(value = "/getPickitem",method = RequestMethod.GET)
+    @ResponseBody
+    public Map getPickitem(@RequestParam("pick_id") String id){
+        Integer ID = Integer.parseInt(id);
+        //System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+ID);
+        Map map = new HashMap();
+        Pickitem_photo_user pickitem_photoUser = pick_itemService.findOne(ID);
+        map.put("list", pickitem_photoUser);
 
         return map;
     }
@@ -189,6 +200,19 @@ public class Maincontroller {
         user.setGender((String) jsonObject.get("gender"));
         user.setName((String) jsonObject.get("nickName"));
         return user;
+    }
+
+
+
+    @Autowired
+    private TestMapper testMapper;
+
+    @ResponseBody
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public List<Pickitem_photo_user> test2(){
+        List<Pickitem_photo_user> itemandUserAll = testMapper.getItemandUserAll();
+
+        return itemandUserAll;
     }
 
 }

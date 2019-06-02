@@ -10,6 +10,11 @@
     <result column="Release_time" jdbcType="TIMESTAMP" property="releaseTime" />
     <result column="Item_type" jdbcType="VARCHAR" property="itemType" />
   </resultMap>
+
+
+
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -68,10 +73,16 @@
       </foreach>
     </where>
   </sql>
+
+
+
   <!-- openid 不能给-->
   <sql id="Base_Column_List">
-    Id, Description, Photo, QQ , Release_time, Item_type
+    Id, Description, Photo, QQ, Release_time, Item_type
   </sql>
+
+
+
   <select id="selectByExample" parameterType="com.wechat.model.Pick_up_itemsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -165,11 +176,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <select id="selectAllitem" resultType="com.wechat.model.Pick_up_items">
-    select
-    <include refid="Base_Column_List"/>
-    from pick_up_items
-  </select>
+
   <select id="findPhototPathByItemId" resultType="java.lang.String">
     SELECT Photo
     from pick_photo_data
@@ -252,5 +259,50 @@
       Item_type = #{itemType,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="findOpenIDByItemId" resultType="string">
+    SELECT Openid
+    FROM pick_up_items
+    WHERE Id = #{id}
+  </select>
+
+  <!-- 结果映射 -->
+  <resultMap type="com.wechat.model.Pickitem_photo_user" id="itemandUserMap">
+    <!--&lt;!&ndash;column指向数据库列名 property指向pojo对象中字段名 &ndash;&gt;-->
+    <!--<result column="pid" property="pid" />-->
+    <!--<result column="pname" property="pname" />-->
+    <!--<result column="position" property="position" />-->
+    <!--<result column="cid" property="cid" />-->
+
+    <association property="pick_up_items" javaType="com.wechat.model.Pick_up_items">
+      <id column="Id" jdbcType="INTEGER" property="id" />
+      <result column="Description" jdbcType="VARCHAR" property="description" />
+      <result column="Photo" jdbcType="VARCHAR" property="photo" />
+      <result column="QQ" jdbcType="VARCHAR" property="qq" />
+      <!--<result column="Openid" jdbcType="VARCHAR" property="openid" />-->
+      <result column="Release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+      <result column="Item_type" jdbcType="VARCHAR" property="itemType" />
+    </association>
+
+    <association property="user" javaType="com.wechat.model.User">
+      <!--<result column="aid" property="aid"/>-->
+      <!--<result column="pid" property="pid"/>-->
+      <!--<result column="shoot" property="shoot"/>-->
+      <!--<id column="Openid" jdbcType="CHAR" property="openid" />-->
+      <result column="Name" jdbcType="CHAR" property="name" />
+      <result column="Gender" jdbcType="CHAR" property="gender" />
+      <result column="Phone" jdbcType="CHAR" property="phone" />
+      <result column="QQ" jdbcType="CHAR" property="qq" />
+      <result column="Studentid" jdbcType="CHAR" property="studentid" />
+    </association>
+  </resultMap>
+
+  <select id="selectAllitems" resultMap="itemandUserMap">
+    SELECT *
+    from User u JOIN pick_up_items p
+    on u.Openid=p.Openid;
+  </select>
+
 
 </mapper>

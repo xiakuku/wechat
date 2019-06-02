@@ -60,4 +60,9 @@ public class User {
     public void setStudentid(String studentid) {
         this.studentid = studentid == null ? null : studentid.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Openid"+openid+"Name"+name;
+    }
 }

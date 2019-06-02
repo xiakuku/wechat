@@ -245,6 +245,7 @@
     </set>
     where Id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.wechat.model.Lost_item" >
     update lost_item
     set Description = #{description,jdbcType=VARCHAR},
@@ -255,4 +256,5 @@
       Item_type = #{itemType,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>

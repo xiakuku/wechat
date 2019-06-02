@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wechat.dao.TestMapper" >
+
+
+  <!-- 结果映射 -->
+
+  <resultMap type="com.wechat.model.Pickitem_photo_user" id="itemandUserMap">
+    <!--&lt;!&ndash;column指向数据库列名 property指向pojo对象中字段名 &ndash;&gt;-->
+    <!--<result column="pid" property="pid" />-->
+    <!--<result column="pname" property="pname" />-->
+    <!--<result column="position" property="position" />-->
+    <!--<result column="cid" property="cid" />-->
+
+    <association property="pick_up_items" javaType="com.wechat.model.Pick_up_items">
+      <id column="Id" jdbcType="INTEGER" property="id" />
+      <result column="Description" jdbcType="VARCHAR" property="description" />
+      <result column="Photo" jdbcType="VARCHAR" property="photo" />
+      <result column="QQ" jdbcType="VARCHAR" property="qq" />
+      <result column="Openid" jdbcType="VARCHAR" property="openid" />
+      <result column="Release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+      <result column="Item_type" jdbcType="VARCHAR" property="itemType" />
+    </association>
+
+    <association property="user" javaType="com.wechat.model.User">
+      <!--<result column="aid" property="aid"/>-->
+      <!--<result column="pid" property="pid"/>-->
+      <!--<result column="shoot" property="shoot"/>-->
+      <id column="Openid" jdbcType="CHAR" property="openid" />
+      <result column="Name" jdbcType="CHAR" property="name" />
+      <result column="Gender" jdbcType="CHAR" property="gender" />
+      <result column="Phone" jdbcType="CHAR" property="phone" />
+      <result column="QQ" jdbcType="CHAR" property="qq" />
+      <result column="Studentid" jdbcType="CHAR" property="studentid" />
+    </association>
+
+  </resultMap>
+
+  <select id="getItemandUserAll" resultMap="itemandUserMap">
+    SELECT *
+    from User u JOIN pick_up_items p
+    on u.Openid=p.Openid;
+  </select>
+
+
+</mapper>
