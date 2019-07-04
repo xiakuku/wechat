@@ -1,7 +1,5 @@
 package com.wechat.controller;
 
-import com.wechat.dao.TestMapper;
-import com.wechat.model.*;
 import com.wechat.service.Lost_itemService;
 import com.wechat.service.Pick_itemService;
 import com.wechat.service.UserService;
@@ -12,10 +10,7 @@ import com.wechat.uitl.MD5Demo;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,14 +41,18 @@ public class Maincontroller {
     @RequestMapping(value = "/getAllLostitem",method = RequestMethod.GET)
     @ResponseBody
     public Map getAllLostitem(){
-        Map map = new HashMap();
-        List<Lost_item> lost_items =lost_itemService.findAll();
-        //map.put("Lost_items",lost_items);
+//        Map map = new HashMap();
+//
+//        List<Lostitem_photo_user> list= lost_itemService.findAll();
+//
+//        list=lost_itemService.findAllInfo(list);
+//        map.put("list",list);
 
-        List<Lost_and_photo> list =lost_itemService.findAllInfo(lost_items);
-        map.put("list",list);
-        return map;
+//        return map;
+        return null;
     }
+
+
 
     /**
      * 查找所有的 招领的物品
@@ -62,13 +61,13 @@ public class Maincontroller {
     @RequestMapping(value = "/getAllPickitem",method = RequestMethod.GET)
     @ResponseBody
     public Map getAllPickitem(){
-        Map map = new HashMap();
-
-        List<Pickitem_photo_user> allInfo = pick_itemService.findAll();
-        allInfo=pick_itemService.findAlladdpath(allInfo);
-        map.put("list",allInfo);
-        return map;
-
+//        Map map = new HashMap();
+//
+//        List<Pickitem_photo_user> allInfo = pick_itemService.findAll();
+//        allInfo=pick_itemService.findAlladdpath(allInfo);
+//        map.put("list",allInfo);
+//        return map;
+        return null;
     }
 
 
@@ -76,14 +75,17 @@ public class Maincontroller {
     @RequestMapping(value = "/getPickitem",method = RequestMethod.GET)
     @ResponseBody
     public Map getPickitem(@RequestParam("pick_id") String id){
-        Integer ID = Integer.parseInt(id);
-        //System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+ID);
-        Map map = new HashMap();
-        Pickitem_photo_user pickitem_photoUser = pick_itemService.findOne(ID);
-        map.put("list", pickitem_photoUser);
+//        Integer ID = Integer.parseInt(id);
+//        //System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+ID);
+//        Map map = new HashMap();
+//        Pickitem_photo_user pickitem_photoUser = pick_itemService.findOne(ID);
+//        map.put("list", pickitem_photoUser);
 
-        return map;
+//        return map;
+        return null;
     }
+
+
 
     @RequestMapping(value = "/test" , method = RequestMethod.GET)
     @ResponseBody
@@ -91,28 +93,29 @@ public class Maincontroller {
         String head=request.getHeader("Cookie");
         System.out.println("head:-----"+head);
 
-
         session.setAttribute("1","222");
-
 
         String sessionid=request.getSession().getId();
 
         System.out.println("sessionid:------"+sessionid);
 
         return null;
+
     }
 
-    //测试
-    @RequestMapping(value = "/get",method = RequestMethod.GET)
-    @ResponseBody
-    public Lost_item getStudent(HttpServletRequest request,HttpSession session){
-        Lost_item l=lost_itemService.findById(1);
-
-        String sessionid=request.getSession().getId();
-        System.out.println("sessionid:------"+sessionid);
-
-        return l;
-    }
+//    //测试
+//    @RequestMapping(value = "/get",method = RequestMethod.GET)
+//    @ResponseBody
+//    public Lost_item getStudent(HttpServletRequest request,HttpSession session){
+//       // Lost_item l=lost_itemService.findById(1);
+//
+//        String sessionid=request.getSession().getId();
+//
+//        System.out.println("sessionid:------"+sessionid);
+//
+////        return l;
+//        return null;
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/authorize", method = RequestMethod.POST)
@@ -178,11 +181,11 @@ public class Maincontroller {
                 userInfo.put("avatarUrl", userInfoJSON.get("avatarUrl"));
                 userInfo.put("unionId", userInfoJSON.get("unionId"));
                 map.put("userInfo", userInfo);
-                if(userService.findByOPenid(openid)==null){
-                    // 则是新用户，需要插入用户信息
-                    User user =getUser(userInfoJSON);
-                    userService.insertnewObject(user);
-                }
+//                if(userService.findByOPenid(openid)==null){
+//                    // 则是新用户，需要插入用户信息
+//                    User user =getUser(userInfoJSON);
+//                    userService.insertnewObject(user);
+//                }
                 session.setAttribute(rd_session,openid);
                 return map;
             }
@@ -191,28 +194,49 @@ public class Maincontroller {
         }
         map.put("status", 0);
         map.put("msg", "解密失败");
+
+
         return map;
     }
+//
+//    public static User getUser(JSONObject jsonObject){
+////        User user =new  User();
+////        user.setOpenid((String) jsonObject.get("openId"));
+////        user.setGender((String) jsonObject.get("gender"));
+////        user.setName((String) jsonObject.get("nickName"));
+////        return user;
+//        return null;
+//    }
 
-    public static User getUser(JSONObject jsonObject){
-        User user =new  User();
-        user.setOpenid((String) jsonObject.get("openId"));
-        user.setGender((String) jsonObject.get("gender"));
-        user.setName((String) jsonObject.get("nickName"));
-        return user;
-    }
+//    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+//    public Map test1(@RequestBody User user){
+//
+//        Map map = new HashMap();
+//        if(user.getOpenid().equals("123")){
+//            map.put("status",1);
+//            map.put("msg","正确");
+//        }else{
+//            map.put("status",0);
+//            map.put("msg","错误");
+//        }
+//
+//        return map;
+//    }
 
 
+//    @Autowired
+//    private TestMapper testMapper;
+//
+//    @ResponseBody
+//    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+//    public List<Pickitem_photo_user> test2(){
+//
+////        //List<Pickitem_photo_user> itemandUserAll = testMapper.getItemandUserAll();
+////
+////        return itemandUserAll;
+//
+//        return null;
+//    }
 
-    @Autowired
-    private TestMapper testMapper;
-
-    @ResponseBody
-    @RequestMapping(value = "/test2", method = RequestMethod.GET)
-    public List<Pickitem_photo_user> test2(){
-        List<Pickitem_photo_user> itemandUserAll = testMapper.getItemandUserAll();
-
-        return itemandUserAll;
-    }
 
 }

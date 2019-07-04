@@ -2,12 +2,12 @@ package com.wechat.model;
 
 import java.util.Date;
 
-public class Lost_item {
+public class lost_item {
     private Integer id;
 
     private String description;
 
-    private String photo;
+    private String phone;
 
     private String qq;
 
@@ -16,6 +16,12 @@ public class Lost_item {
     private Date releaseTime;
 
     private String itemType;
+
+    private String getaddress;
+
+    private String role;
+
+    private String ifdelete;
 
     public Integer getId() {
         return id;
@@ -33,12 +39,12 @@ public class Lost_item {
         this.description = description == null ? null : description.trim();
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo == null ? null : photo.trim();
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getQq() {
@@ -71,5 +77,29 @@ public class Lost_item {
 
     public void setItemType(String itemType) {
         this.itemType = itemType == null ? null : itemType.trim();
+    }
+
+    public String getGetaddress() {
+        return getaddress;
+    }
+
+    public void setGetaddress(String getaddress) {
+        this.getaddress = getaddress == null ? null : getaddress.trim();
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role == null ? null : role.trim();
+    }
+
+    public String getIfdelete() {
+        return ifdelete;
+    }
+
+    public void setIfdelete(String ifdelete) {
+        this.ifdelete = ifdelete == null ? null : ifdelete.trim();
     }
 }

@@ -29,10 +29,10 @@ public class generator {
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
 
-//        用的时候把注释去掉
-//        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-//
-//        myBatisGenerator.generate(null);
+        //用的时候把注释去掉
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+
+        myBatisGenerator.generate(null);
 
     }
 

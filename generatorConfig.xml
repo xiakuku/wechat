@@ -34,7 +34,7 @@
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
         <!-- targetProject:mapper映射文件生成的位置 -->
-        <sqlMapGenerator targetPackage="com.wechat.mapper"
+        <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
@@ -48,11 +48,17 @@
         </javaClientGenerator>
         <!-- 指定数据库表 -->
 
-        <table tableName="lost_item"  domainObjectName="Lost_item" ></table>
-        <table tableName="user" domainObjectName="User"></table>
-        <table tableName="lost_photo_data" domainObjectName="Lost_photo_data"></table>
-        <table tableName="pick_photo_data" domainObjectName="Pick_photo_data"></table>
-        <table tableName="pick_up_items" domainObjectName="Pick_up_items"></table>
+        <table tableName="lost_item"  domainObjectName="lost_item" ></table>
+        <table tableName="t_user" domainObjectName="t_user"></table>
+        <table tableName="lost_photo" domainObjectName="lost_photo"></table>
+
+        <table tableName="pick_photo" domainObjectName="pick_photo"></table>
+        <table tableName="pickup_item" domainObjectName="pickup_item"></table>
+
+        <table tableName="lost_top" domainObjectName="lost_top"></table>
+        <table tableName="pick_top" domainObjectName="pick_top"></table>
+
+
 
     </context>
 </generatorConfiguration>
